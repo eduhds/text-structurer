@@ -1,0 +1,13 @@
+{
+  "name": "text-structurer",
+  "version": "1.0.0",
+  "description": "Parse string with formats like MarkDown to structured format output",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "types": "./index.d.ts"
+}

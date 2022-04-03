@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Text-Structurer</title>
+	</head>
+	<body>
+		<div id="content"></div>
+		<script src="index.js"></script>
+		<script>
+			// Remove "export" from index.js
+
+			const text =
+				'#Lorem ipsum **dolor** sit amet\n consectetur adipiscing elit, **sed** do \neiusmod tempor incididunt ut **labore** et dolore magna __aliqua__. \nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip\n ex ea commodo consequat. \n#Duis aute irure dolor in __reprehenderit__ in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt __in__ culpa \nqui officia deserunt mollit anim id est laborum.';
+
+			(() => {
+				let content = document.querySelector('#content');
+				let html = '';
+
+				structureText(text).forEach(item => {
+					let tag = item.type.toLowerCase();
+
+					html += `<${tag}>${item.value
+						.map(val =>
+							val.format === 'B'
+								? `<b>${val.part}</b>`
+								: val.format === 'I'
+								? `<i>${val.part}</i>`
+								: val.part
+						)
+						.join('')}</${tag}>`;
+				});
+
+				content.innerHTML = html;
+			})();
+		</script>
+	</body>
+</html>
