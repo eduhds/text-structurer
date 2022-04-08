@@ -30,7 +30,7 @@ export function structureText(text = '') {
 			.replace('#', '')
 			.replace('-', '')
 			.trim()
-			.split(/(\*\*)|(__)/)
+			.split(/(\*\*)|(__)|(@@)/)
 			.filter(c => Boolean(c));
 
 		for (const char of characters) {
@@ -38,6 +38,7 @@ export function structureText(text = '') {
 			 * Find Formats
 			 * ** Bold (B)
 			 * __ Italic (I)
+			 * @@ Link (A)
 			 */
 			if (['N', 'B'].includes(format) && char === '**') {
 				if (count === 0) {
@@ -58,6 +59,21 @@ export function structureText(text = '') {
 				} else if (count === 1) {
 					count = 0;
 					value.push({ part, format });
+					format = 'N';
+				}
+				part = '';
+			} else if (['N', 'A'].includes(format) && char === '@@') {
+				if (count === 0) {
+					count = 1;
+					value.push({ part, format });
+					format = 'A';
+				} else if (count === 1) {
+					count = 0;
+					value.push({
+						part: part.split('|')[0],
+						format,
+						meta: part.split('|')[1] || part.split('|')[0],
+					});
 					format = 'N';
 				}
 				part = '';
