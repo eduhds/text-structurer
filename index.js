@@ -26,8 +26,8 @@ export function structureText(text = '') {
 		}
 
 		const characters = sentence
-			.replace('#', '')
 			.replace('##', '')
+			.replace('#', '')
 			.replace('-', '')
 			.trim()
 			.split(/(\*\*)|(__)/)
