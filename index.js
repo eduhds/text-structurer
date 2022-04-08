@@ -15,10 +15,10 @@ export function structureText(text = '') {
 		 * ## Header/Title (H2)
 		 * - List Item (LI)
 		 */
-		if (sentence.startsWith('#')) {
-			type = 'H1';
-		} else if (sentence.startsWith('##')) {
+		if (sentence.startsWith('##')) {
 			type = 'H2';
+		} else if (sentence.startsWith('#')) {
+			type = 'H1';
 		} else if (sentence.startsWith('-')) {
 			type = 'LI';
 		} else {
